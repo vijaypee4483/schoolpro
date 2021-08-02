@@ -7,7 +7,7 @@ from tkcalendar import DateEntry
 import sqlite3
      
 try:
-    sdata=sqlite3.connect(database="student.sqlite")
+    sqlite3.connect(database="student.sqlite")
     cursor=sdata.cursor()
     table1="create table sresult(name text,sclass text,rollno integer primary key ,hindi integer,english integer,maths integer,science integer,sscience integer,gk integer,art integer,sports integer,total integer)"
     table2="create table sdetail(name text,sclass text,rollno integer primary key,firstname text,lastname text,mother text,father text,dob text,adhar integer,email text,mobile integer,address1 text,address2 text,address3 text,address4 text,address5 text)"
