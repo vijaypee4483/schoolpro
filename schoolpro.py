@@ -1,49 +1,56 @@
+'''This app is basicly created for saving all data related to student like his name,class,faimly details, result etc.'''
 from tkinter import *
 from PIL import Image,ImageTk
 from tkinter.ttk import Combobox
 from tkinter.scrolledtext import ScrolledText
 from tkinter import messagebox
-from tkcalendar import DateEntry
+from tkcalendar import DateEntry #download from pip
 import sqlite3
-     
+
+'''create database on sqlite3 and then creat two tables one for student detail and second for student result.'''
 try:
-    sdata=sqlite3.connect(database="student.sqlite")
-    cursor=sdata.cursor()
+    sdata=sqlite3.connect(database="student.sqlite") #create and connect database
+    cursor=sdata.cursor() #for retrieving data from result sets one row at a time.
+    '''for creating table and its element.'''
     table1="create table sresult(name text,sclass text,rollno integer primary key ,hindi integer,english integer,maths integer,science integer,sscience integer,gk integer,art integer,sports integer,total integer)"
     table2="create table sdetail(name text,sclass text,rollno integer primary key,firstname text,lastname text,mother text,father text,dob text,adhar integer,email text,mobile integer,address1 text,address2 text,address3 text,address4 text,address5 text)"
-    cursor.execute(table1)
+    cursor.execute(table1) #execut table
     cursor.execute(table2)
-    sdata.commit()
-    sdata.close()
+    sdata.commit() #for ending current transaction and make permanent all changes performed in the transaction.
+    sdata.close() #for close cursor
     print("Tables created")
 except Exception as e:
     print(e)
 
+'''creating window on tkinter'''
 win=Tk()
-img=Image.open('copy.jpg')
-image=ImageTk.PhotoImage(img)
-win.geometry('1720x1080')
-win.title("Our School by vp")
-lable= Label(win,image=image)
-lable.pack()
+img=Image.open('copy.jpg') #for getting image from folder
+image=ImageTk.PhotoImage(img) #for using image in my app
+win.geometry('1720x1080') #for window size setting
+win.title("Our School by vp") # prin title on title bar
+lable= Label(win,image=image) # for use image on window
+lable.pack() #for laying things out along the sides of a box.
 
+'''creating home frame'''
 def home_frm():
     frm=Frame(win,highlightthickness=3,highlightbackground='plum',background='thistle')
-    frm.place(x=420,y=55,width=500,height=210)
+    frm.place(x=420,y=55,width=500,height=210) #set frame size and position
 
-    def mainpage():
+    def mainpage(): #function for destroying home frame and enter in main frame
         frm.destroy()
         mainpage_frame()
-
-    lbl_welcome=Label (frm,text=" Welcome to Our School Application ",font=('',20,'bold'),fg="blue",bg="red")
+    
+    '''printing something in lable and setting its position '''
+    lbl_welcome=Label (frm,text=" Welcome to Our School Application ",font=('',20,'bold'),fg="blue",bg="red") 
     lbl_welcome.place(x=0,y=0)
     lbl_main= Label (frm,text='Click here to start\nworking',font=('',15,'bold'),justify='center',fg="green",bg='thistle')
     lbl_main.place(x=125,y=100)
-
+     
+    '''creating button''' 
     btn_start=Button(frm,text='Get Start',font=('',20,'bold'),fg="black",bd=3,command=mainpage)
     btn_start.place(x=160,y=150)
 
-def mainpage_frame():
+def mainpage_frame(): #main frame
     frm=Frame(win,highlightthickness=3,highlightbackground='plum',background='thistle')
     frm.place(x=420,y=55,width=500,height=310)
 
